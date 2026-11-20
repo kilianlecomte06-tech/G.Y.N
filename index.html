@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <title>G.Y.N</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Roboto:wght@300;400;700;900&family=Roboto+Mono:wght@400&display=swap"
+      rel="stylesheet"
+    />
+    <link href="style.css" rel="stylesheet" />
+  </head>
+  <body>
+    <div class="grain"></div>
+    <div class="vig"></div>
+    <nav>
+      <a href="#groupe">Le groupe</a><a href="#membres">Membres</a
+      ><a href="#news">News</a><a href="#albums">Albums</a
+      ><a href="#dates">Dates</a><a href="#contact">Réseaux</a>
+    </nav>
+
+    <header class="hero">
+      <div>
+        <div class="state">État: <span id="typed">éveillée</span><b>_</b></div>
+        <h1 class="logo">
+          <img src="images/gynLogo.jpg" alt="G.Y.N" />
+        </h1>
+        <p class="sub">Une entité qui prend vie à travers un groupe.</p>
+      </div>
+    </header>
+
+    <section id="groupe" class="rv">
+      <span class="idx">01 /</span>
+      <h2>Le groupe</h2>
+      <p class="lead">
+        G.Y.N est une entité qui prend vie à travers un groupe. Elle dormait.
+        Elle ne dort plus.
+      </p>
+    </section>
+
+    <section id="membres" class="rv">
+      <span class="idx">02 /</span>
+      <h2>Membres</h2>
+      <div class="grid">
+        <div class="card">
+          <span class="num">1</span>
+          <div class="ph">
+            <img src="images/kilian.jpg" alt="Kilian Lecomte" />
+          </div>
+          <h3>Kilian Lecomte</h3>
+          <p>Le sang frais</p>
+        </div>
+        <div class="card">
+          <span class="num">2</span>
+          <div class="ph">
+            <img src="images/jl.jpg" alt="Jean-Louis Garnaud" />
+          </div>
+          <h3>Jean-Louis Garnaud</h3>
+          <p>La face cachée</p>
+        </div>
+        <div class="card">
+          <span class="num">3</span>
+          <div class="ph">
+            <img src="images/guillaume.jpg" alt="Guillaume Coulon" />
+          </div>
+          <h3>Guillaume Coulon</h3>
+          <p>« Goyon », le frontman</p>
+        </div>
+        <div class="card">
+          <span class="num">4</span>
+          <div class="ph">
+            <img src="images/eric.jpg" alt="Éric Spychala" />
+          </div>
+          <h3>Éric Spychala</h3>
+          <p>Notre fidèle roadie</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="news" class="band rv">
+      <div>
+        <span class="idx">03 /</span>
+        <h2>News</h2>
+        <div class="empty">Rien à signaler.<br />Pour l’instant.</div>
+      </div>
+    </section>
+
+    <section id="albums" class="rv">
+      <span class="idx">04 /</span>
+      <h2>Albums</h2>
+      <div class="empty">Rien d’enregistré.<br />Ça viendra.</div>
+    </section>
+
+    <section id="dates" class="band rv">
+      <div>
+        <span class="idx">05 /</span>
+        <h2>Dates</h2>
+        <div class="empty">
+          Aucune date prévue pour l’instant.<br />Personne n’est pressé.
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="rv">
+      <span class="idx">06 /</span>
+      <h2>Réseaux</h2>
+      <div class="soc">
+        <a
+          href="https://www.facebook.com/G.Y.N.OfficialFB/"
+          target="_blank"
+          rel="noopener"
+          >Facebook</a
+        >
+        <a
+          href="https://www.instagram.com/g.y.n.officiel/"
+          target="_blank"
+          rel="noopener"
+          >Instagram</a
+        >
+      </div>
+    </section>
+
+    <footer>© 2026 G.Y.N</footer>
+    <script>
+      document.documentElement.classList.add("js");
+      var io = new IntersectionObserver(
+        function (e) {
+          e.forEach(function (x) {
+            if (x.isIntersecting) {
+              x.target.classList.add("in");
+              io.unobserve(x.target);
+            }
+          });
+        },
+        { threshold: 0.12 },
+      );
+      document.querySelectorAll(".rv").forEach(function (el) {
+        io.observe(el);
+      });
+      if (matchMedia("(hover:hover)").matches) {
+        addEventListener("pointermove", function (e) {
+          var s = document.documentElement.style;
+          s.setProperty("--mx", e.clientX + "px");
+          s.setProperty("--my", e.clientY + "px");
+        });
+      }
+      (function () {
+        var el = document.getElementById("typed");
+        var cur = document.querySelector(".state b");
+        if (!el || !cur) return;
+
+        var full = "éveillée";
+        el.textContent = "";
+        var i = 0;
+
+        function blink() {
+          setInterval(function () {
+            cur.style.visibility =
+              cur.style.visibility === "hidden" ? "visible" : "hidden";
+          }, 500);
+        }
+
+        function type() {
+          if (i >= full.length) return blink();
+          i++;
+          el.textContent = full.slice(0, i);
+          setTimeout(type, 70 + Math.random() * 110);
+        }
+
+        setTimeout(type, 900);
+      })();
+    </script>
+  </body>
+</html>
