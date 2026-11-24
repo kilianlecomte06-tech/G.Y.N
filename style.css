@@ -450,6 +450,226 @@ h2 {
   color: var(--mute);
   letter-spacing: 0.04em;
 }
+.dates-block {
+  margin-top: 56px;
+}
+.dates-title {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin: 0 0 22px;
+  font:
+    700 clamp(18px, 3.4vw, 26px)/1.2 Cinzel,
+    Georgia,
+    serif;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+.dates-title::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--brass);
+  opacity: 0.6;
+}
+.dates-block--future .dates-title {
+  color: var(--fg);
+}
+.dates-block--past .dates-title {
+  color: var(--mute);
+}
+
+.shows {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 12px;
+}
+
+/* message "rien de prévu" : masqué dès qu'une date existe dans la liste */
+.shows .none {
+  padding: 30px 0;
+  border-top: 1px solid var(--brass);
+  border-bottom: 1px solid var(--brass);
+  font:
+    400 14px/1.8 "Roboto Mono",
+    monospace;
+  letter-spacing: 0.04em;
+  color: var(--fg);
+}
+.shows:has(.show) .none {
+  display: none;
+}
+
+/* une date */
+.show {
+  position: relative;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 8px 22px;
+  padding: 16px 20px;
+  background: rgba(7, 7, 8, 0.72);
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--brass);
+  backdrop-filter: blur(3px);
+  transition: 0.3s;
+}
+.show:hover {
+  border-color: var(--accent);
+  background: rgba(20, 11, 11, 0.85);
+}
+.show-date {
+  display: grid;
+  justify-items: center;
+  min-width: 74px;
+  padding-right: 22px;
+  border-right: 1px solid var(--line);
+  line-height: 1;
+}
+.show-date b {
+  font:
+    900 38px/1 Roboto,
+    sans-serif;
+  color: var(--fg);
+}
+.show-date span {
+  margin-top: 6px;
+  font:
+    400 11px "Roboto Mono",
+    monospace;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--mute);
+  white-space: nowrap;
+}
+.show-info {
+  display: grid;
+  gap: 4px;
+  min-width: 0;
+}
+.show-venue {
+  font:
+    700 clamp(16px, 3.6vw, 20px)/1.25 Cinzel,
+    Georgia,
+    serif;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.show-city {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font:
+    400 13px "Roboto Mono",
+    monospace;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--mute);
+}
+
+/* pastille d'état : le texte change tout seul selon la classe */
+.show::after {
+  font:
+    400 11px "Roboto Mono",
+    monospace;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border: 1px solid currentColor;
+}
+
+/* --- PASSÉ --- */
+.show--past {
+  border-left-color: var(--brass);
+}
+.show--past .show-date b {
+  color: var(--mute);
+}
+.show--past::after {
+  content: "Passé";
+  color: var(--mute);
+}
+
+/* --- À VENIR : il suffit de remplacer show--past par show--future --- */
+.show--future {
+  border-left-color: var(--accent);
+}
+.show--future .show-date b {
+  color: #e03030;
+}
+.show--future::after {
+  content: "À venir";
+  color: #e03030;
+}
+
+/* mobile : la pastille passe sous le lieu */
+@media (max-width: 520px) {
+  .show {
+    grid-template-columns: auto 1fr;
+    padding: 14px;
+    gap: 10px 16px;
+  }
+  .show-date {
+    padding-right: 16px;
+    min-width: 62px;
+  }
+  .show::after {
+    grid-column: 1 / -1;
+    justify-self: start;
+  }
+}
+
+/* --- DRAPEAUX (en CSS pur : s'affichent partout, y compris sous Windows) --- */
+.flag {
+  display: inline-block;
+  width: 22px;
+  height: 15px;
+  flex: none;
+  border-radius: 2px;
+  box-shadow: 0 0 0 1px rgba(216, 213, 204, 0.25);
+}
+.flag--fr {
+  background: linear-gradient(
+    90deg,
+    #1f3f9a 33.3%,
+    #f4f4f4 33.3% 66.6%,
+    #d02a2a 66.6%
+  );
+}
+.flag--be {
+  background: linear-gradient(
+    90deg,
+    #111 33.3%,
+    #f5c518 33.3% 66.6%,
+    #d02a2a 66.6%
+  );
+}
+.flag--it {
+  background: linear-gradient(
+    90deg,
+    #1f8a4c 33.3%,
+    #f4f4f4 33.3% 66.6%,
+    #d02a2a 66.6%
+  );
+}
+.flag--de {
+  background: linear-gradient(
+    180deg,
+    #111 33.3%,
+    #d02a2a 33.3% 66.6%,
+    #f5c518 66.6%
+  );
+}
+.flag--es {
+  background: linear-gradient(
+    180deg,
+    #c8312b 25%,
+    #f5c518 25% 75%,
+    #c8312b 75%
+  );
+}
 .soc {
   display: flex;
   flex-wrap: wrap;
